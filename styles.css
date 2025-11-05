@@ -1,0 +1,86 @@
+
+/* Neón blanco-azulado minimal — Lunnetti */
+:root{
+  --bg:#000;
+  --neon:#eaf6ff; /* white-blue neon */
+  --neon-2:#bfe9ff;
+  --glow: 0 0 18px rgba(190,233,255,0.18), 0 0 40px rgba(190,233,255,0.10);
+  --glass: rgba(255,255,255,0.03);
+  --muted: rgba(255,255,255,0.6);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--neon);-webkit-font-smoothing:antialiased}
+body{display:flex;align-items:center;justify-content:center;overflow:hidden;padding:40px}
+
+/* subtle sparkles background (not literal stars) */
+.bg-sparkles{
+  position:fixed;inset:0;background:radial-gradient(ellipse at 20% 10%, rgba(255,255,255,0.02) 0%, transparent 25%),
+                             radial-gradient(ellipse at 80% 80%, rgba(255,255,255,0.02) 0%, transparent 22%);
+  pointer-events:none;z-index:0;
+}
+.bg-sparkles::after{
+  content:"";position:absolute;inset:0;background:
+    radial-gradient(circle at 10% 20%, rgba(255,255,255,0.12) 0, rgba(255,255,255,0.06) 1px, transparent 12px),
+    radial-gradient(circle at 30% 70%, rgba(255,255,255,0.09) 0, rgba(255,255,255,0.04) 1px, transparent 10px),
+    radial-gradient(circle at 70% 30%, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.03) 1px, transparent 14px);
+  opacity:0.9;mix-blend-mode:screen;filter:blur(6px);transform:scale(1.05);
+  animation: spark 6s linear infinite;
+}
+@keyframes spark{
+  0%{opacity:0.85;transform:translateY(0) scale(1.02)}
+  50%{opacity:1;transform:translateY(-6px) scale(1.03)}
+  100%{opacity:0.85;transform:translateY(0) scale(1.02)}
+}
+
+/* center layout */
+.center{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center}
+
+/* neon text L U N N E T T I spaced */
+.neon{
+  font-weight:800;letter-spacing:14px;font-size:44px;margin:0;padding:8px 18px;
+  color:var(--neon);text-shadow: 0 0 8px rgba(234,246,255,0.6), 0 0 28px rgba(191,233,255,0.18);
+  -webkit-text-stroke: 0.6px rgba(255,255,255,0.06);
+}
+
+/* small subtitle */
+.small{font-size:18px;margin:0;color:var(--muted);opacity:0.9}
+.small-title{font-size:22px;letter-spacing:8px;margin:0}
+
+/* button neon */
+.neon-btn{
+  --btn-bg: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  padding:12px 28px;border-radius:12px;border:1px solid rgba(191,233,255,0.08);
+  background:var(--btn-bg);color:var(--neon);font-weight:700;letter-spacing:2px;
+  cursor:pointer;box-shadow: var(--glow);transition:all 280ms ease;
+  position:relative;outline:none;
+}
+.neon-btn::before{
+  content:"";position:absolute;inset:-2px;border-radius:14px;
+  background:linear-gradient(90deg, rgba(190,233,255,0.04), rgba(255,255,255,0.02));
+  z-index:-1;filter:blur(8px);opacity:0.6;transition:all 300ms ease;
+}
+.neon-btn:hover{
+  transform:translateY(-6px) scale(1.02);
+  box-shadow: 0 6px 30px rgba(191,233,255,0.22), 0 0 60px rgba(190,233,255,0.12);
+}
+.neon-btn:active{transform:translateY(-2px) scale(0.995)}
+
+/* small extra text */
+.small{color:var(--muted)}
+
+/* countdown layout */
+.countdown{display:flex;gap:18px;margin:12px 0 4px;align-items:center;justify-content:center}
+.time{background:rgba(255,255,255,0.02);padding:14px 18px;border-radius:10px;min-width:72px;text-align:center;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.03)}
+.time span{display:block;font-weight:800;font-size:28px;letter-spacing:1px}
+.time small{display:block;font-weight:700;font-size:11px;margin-top:6px;color:var(--muted)}
+
+/* misc */
+.info{font-size:13px;color:rgba(255,255,255,0.55);margin-top:8px}
+@media(max-width:520px){
+  .neon{font-size:32px;letter-spacing:10px}
+  .time span{font-size:22px}
+  .countdown{flex-wrap:wrap;gap:10px}
+}
